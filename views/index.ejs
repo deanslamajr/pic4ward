@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pic4Ward</title>
+	<link rel="stylesheet" href="css/pic4ward.css">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" language="JavaScript">
+		function set_body_height()
+		{
+		    var wh = $(window).height();
+		    $('body').attr('style', 'height:' + wh + 'px;');
+		}
+		$(document).ready(function() {
+		    set_body_height();
+		    $(window).bind('resize', function() { set_body_height(); });
+		});
+	</script>
+</head>
+<body>
+		<img src="img/1.jpg" alt="The first" class="center fit"></img>
+</body>
+</html>
