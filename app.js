@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.set('view engine', 'ejs');
+app.set('port', (process.env.PORT || 1337))
 //app.set('views', path.join(__dirname, 'public'));
 
 app.use(express.static(path.join(__dirname, 'views')));
@@ -17,8 +18,6 @@ app.use(require('./routes'));
 
 // start the server
 
-var port = process.env.PORT || 1337;
-
-app.listen(port, function (){
-	console.log('ready on port ' + port);
+app.listen(app.get('port'), function (){
+	console.log('ready on port ' + app.get('port'));
 });
