@@ -4,16 +4,17 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.12.4",
-    "require": "^2.4.18",
     "body-parser": "^1.12.4",
-    "ejs": "^2.3.1"
+    "ejs": "^2.3.1",
+    "express": "^4.12.4",
+    "mongojs": "^1.0.0",
+    "require": "^2.4.18"
   },
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Dean Slama",
   "license": "ISC"
 }
