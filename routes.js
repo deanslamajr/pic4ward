@@ -12,10 +12,11 @@ var db = mongojs( 'heroku_70wln8p7:ckrcrt2u2s98sq78job27md3pk@ds043952.mongolab.
 router.get('/', function (req, res){
 	var picId = '557c7ccfe4b00a69307df6d9';
 
-	db.PicObjects.findOne({_id:mongojs.ObjectId(picId)},function(err, docs) {
+	db.PicObjects.findOne({_id:mongojs.ObjectId(picId)},function(err, doc) {
 		if (!err) {
-			var picObj = docs; 
-			res.render('index', {'picObj': picObj} );
+			var picObj = doc;
+			var clickables = doc.clickables;
+			res.render('index', {'picObj': picObj, 'clickables': clickables} );
 		} else {
 			console.log(err);
 			res.send('Whoops!!');
