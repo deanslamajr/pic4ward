@@ -16,7 +16,7 @@ router.get('/', function (req, res){
 		if (!err) {
 			var picObj = doc;
 			var clickables = doc.clickables;
-			res.render('index', {'picObj': picObj, 'clickables': clickables} );
+			res.render('index', {'picObj': picObj, 'clickables': clickables, 'newClickables': JSON.stringify(clickables)} );
 		} else {
 			console.log(err);
 			res.send('Whoops!!');
