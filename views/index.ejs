@@ -1,81 +1,37 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title><%= picObj.name %></title>
-	<link rel="stylesheet" href="css/pic4ward.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
-	<script type="text/javascript" language="JavaScript">
-		function set_body_height() {
-		    var wh = $(window).height();
-		    $('div').attr('style', 'height:' + wh + 'px;');
-		}
-		function getPath() {
-			var stuff = {x: 0, y: 0, path: 'M '};<% for (var i = 0; i < clickables[0].points.length; i++){ %>
-			<% if (i != 0) { %>stuff.path += 'l ';<% } %>
-			stuff = concatonator(<%= clickables[0].points[i].x %>, <%= clickables[0].points[i].y %>, stuff);<% } %>
-			stuff.path += "z"
-			return stuff.path;
-		}
-		function concatonator(x, y, stuff) {
-			var calculated;
-			var temp;
-			calculated = $("img").width() * x;
-			temp = Math.round(calculated);
-			calculated = temp - stuff.x;
-			stuff.x = temp;
-			stuff.path += calculated + ' ';
-			calculated = $("img").height() * y;
-			temp = Math.round(calculated);
-			calculated = temp - stuff.y;
-			stuff.y = temp;
-			stuff.path += calculated + ' ';
-			return stuff
-		}
-		function setup_canvas() {
-			if(this.paper) {
-				this.circle.remove();
-				delete this.paper;
-				$('svg').remove();
-			}
-    		this.paper = new Raphael( (($(window).width()/2)-($("img").width())/2), 0, $("img").width(), $("img").height());
-    	}
-    	function draw_clickables() {
-    		var path = getPath();
-    		this.circle = this.paper.path(path);
-    		var that = this;
-    		var shimmer = function () {
-    			that.circle.animate({stroke: '#FFFFFF'}, 250, shammer);
-			}
-			var shammer = function () {
-    			that.circle.animate({stroke: '#000000'}, 750, shimmer);
-			}
-			shimmer();
-    	}
-    	function redraw_path() {
-    		path = getPath();
-    		this.circle.animate({path: path}, 50);
-    	}
-    	$(document).ready(function() {
-    		console.log(JSON.parse('<%-newClickables%>'));
-    		set_body_height();
-    		$(window).bind('resize', function() { 
-		    	set_body_height();
-		    	setup_canvas(); 
-		    	draw_clickables();
-		    });
-    	});
-		$(window).load(function() {			
-		    set_body_height();
-		    setup_canvas();
-		    draw_clickables();	    
-		});
-	</script>
+  <meta charset="UTF-8">
+  <title><%= picObj.name %></title>
+  <link rel="stylesheet" href="css/pic4ward.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+  <script src="js/util.js"></script>
+  <script type="text/javascript" language="JavaScript">
+    var dataStore;
+    var clickablesArray;
+    var resizeCallback = function() { 
+      set_body_height();
+      setup_canvas(clickablesArray); 
+      clickablesArray = draw_clickables(dataStore);
+    }
+    // After DOM is constructed
+    $(document).ready(function() {
+      dataStore = <%-newClickables%>;
+      set_body_height();
+      $(window).bind('resize', resizeCallback);
+      
+    });
+    // After image has been fully loaded
+    $(window).load(function() {     
+        setup_canvas(clickablesArray);
+        clickablesArray = draw_clickables(dataStore);     
+    });
+  </script>
 </head>
 <body>
-	<div>
-		<img src="<%= picObj.url %>" alt="The first" class="center fit"></img>
-	</div>
+  <div>
+    <img src="<%= picObj.url %>" alt="The first" class="center fit"></img>
+  </div>
 </body>
 </html>
