@@ -13,7 +13,7 @@ function setup_canvas(clickablesArray) {
     $('svg').remove();
   }
   this.paper = new Raphael( (($(window).width()/2)-($("img").width())/2), 0, $("img").width(), $("img").height());
-  
+  /*
   // To grab points from console
   this.paper.rect(0,0,$("img").width(),$("img").height())
     .attr({"fill": "clear", "fill-opacity": 0})
@@ -23,6 +23,7 @@ function setup_canvas(clickablesArray) {
       console.log((e.pageX - offset.left)/$("img").width());
       console.log((e.pageY - offset.top)/$("img").height());
     };
+    */
 }
 
 function draw_clickables(clickablesDataArray) {
@@ -30,8 +31,15 @@ function draw_clickables(clickablesDataArray) {
   for(var i = 0; i<clickablesDataArray.length; i++) {  
     var path = getPath(clickablesDataArray[i]);
     var temp = this.paper.path(path)
-      .attr({"stroke-opacity": 0, "stroke-width": 2})
-      .glow({color: clickablesDataArray[i].color, width: 1.5, opacity: .5});
+      .attr({ "stroke-opacity": 0, 
+              "stroke-width": 1,
+              fill: "clear",
+              "fill-opacity": 0});
+    temp.node.onclick = function(url) {
+        console.log(url);
+        window.location.href = url;
+      }.bind(clickablesDataArray[i], clickablesDataArray[i].url);
+    temp.glow({color: clickablesDataArray[i].color, width: 1.5, opacity: .25})  
     clickablesArray.push(temp);
   }
   for(var i = 0; i<clickablesArray.length; i++) {
@@ -39,7 +47,7 @@ function draw_clickables(clickablesDataArray) {
         clickablesArray[temp].animate({stroke: clickablesDataArray[temp].color, "stroke-opacity": 5}, 250, clickablesArray[temp].shammer);
     }.bind(this,i);
     clickablesArray[i].shammer = function (temp) {
-        clickablesArray[temp].animate({stroke: '#000000', "stroke-opacity": 0}, 1500, clickablesArray[temp].shimmer);
+        clickablesArray[temp].animate({stroke: '#FFFFFF', "stroke-opacity": 0}, 1000, clickablesArray[temp].shimmer);
     }.bind(this,i)
     clickablesArray[i].shimmer();
   }

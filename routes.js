@@ -24,4 +24,20 @@ router.get('/', function (req, res){
 	});
 });
 
+router.get('/:id', function (req, res){
+	var reqGrabber = req.params.id;
+	console.log(reqGrabber);
+
+	db.PicObjects.findOne({grabber: reqGrabber },function(err, doc) {
+		if (doc) {
+			var picObj = doc;
+			var clickables = doc.clickables;
+			res.render('index', {'picObj': picObj, 'clickables': clickables, 'newClickables': JSON.stringify(clickables)} );
+		} else {
+			console.log(err);
+			res.send('Whoops!!');
+		}
+	});
+});
+
 module.exports = router;

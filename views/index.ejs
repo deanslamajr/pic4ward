@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title><%= picObj.name %></title>
-  <link rel="stylesheet" href="css/pic4ward.css">
+  <link rel="stylesheet" href="/css/pic4ward.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
-  <script src="js/util.js"></script>
+  <script id="util" src="/js/util.js"></script>
   <script type="text/javascript" language="JavaScript">
     var dataStore;
     var clickablesArray;
@@ -20,7 +20,12 @@
       dataStore = <%-newClickables%>;
       set_body_height();
       $(window).bind('resize', resizeCallback);
-      
+      var relURL = $(location).attr('host');
+      var imageSrc = 'http://' + relURL + '/<%= picObj.url %>';
+      var jsSrc    = 'http://' + relURL + 'js/util.js';
+      console.log(relURL);
+      $('img').attr('src', imageSrc);
+      $('#util').attr('src', jsSrc);
     });
     // After image has been fully loaded
     $(window).load(function() {     
@@ -28,10 +33,11 @@
         clickablesArray = draw_clickables(dataStore);     
     });
   </script>
+  
 </head>
 <body>
   <div>
-    <img src="<%= picObj.url %>" alt="The first" class="center fit"></img>
+    <img src="" alt="The first" class="center fit"></img>
   </div>
 </body>
 </html>
