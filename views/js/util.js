@@ -37,7 +37,7 @@ function draw_clickables(clickablesDataArray) {
         clickablesArray[temp].animate({stroke: clickablesDataArray[temp].color, "stroke-opacity": 1}, 250, clickablesArray[temp].shammer);
     }.bind(this,i);
     clickablesArray[i].shammer = function (temp) {
-        clickablesArray[temp].animate({stroke: '#FFFFFF', "stroke-opacity": 0}, 1250, clickablesArray[temp].shimmer);
+        clickablesArray[temp].animate({stroke: '#000000', "stroke-opacity": 0}, 1500, clickablesArray[temp].shimmer);
     }.bind(this,i)
     clickablesArray[i].shimmer();
   }
