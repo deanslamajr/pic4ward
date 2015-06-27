@@ -30,13 +30,13 @@ function draw_clickables(clickablesDataArray) {
   for(var i = 0; i<clickablesDataArray.length; i++) {  
     var path = getPath(clickablesDataArray[i]);
     var temp = this.paper.path(path)
-      .attr({"stroke-opacity": 0, "stroke-width": 1.25})
-      .glow({color: clickablesDataArray[i].color, width: 2.5, opacity: .25});
+      .attr({"stroke-opacity": 0, "stroke-width": 2})
+      .glow({color: clickablesDataArray[i].color, width: 1.5, opacity: .5});
     clickablesArray.push(temp);
   }
   for(var i = 0; i<clickablesArray.length; i++) {
     clickablesArray[i].shimmer = function (temp) {
-        clickablesArray[temp].animate({stroke: clickablesDataArray[temp].color, "stroke-opacity": 1}, 250, clickablesArray[temp].shammer);
+        clickablesArray[temp].animate({stroke: clickablesDataArray[temp].color, "stroke-opacity": 5}, 250, clickablesArray[temp].shammer);
     }.bind(this,i);
     clickablesArray[i].shammer = function (temp) {
         clickablesArray[temp].animate({stroke: '#000000', "stroke-opacity": 0}, 1500, clickablesArray[temp].shimmer);
