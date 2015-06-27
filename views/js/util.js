@@ -29,7 +29,9 @@ function draw_clickables(clickablesDataArray) {
   var clickablesArray = [];
   for(var i = 0; i<clickablesDataArray.length; i++) {  
     var path = getPath(clickablesDataArray[i]);
-    var temp = this.paper.path(path).attr({"stroke-opacity": 0, "stroke-width": 1.25});
+    var temp = this.paper.path(path)
+      .attr({"stroke-opacity": 0, "stroke-width": 1.25})
+      .glow({color: clickablesDataArray[i].color, width: 2.5, opacity: .25});
     clickablesArray.push(temp);
   }
   for(var i = 0; i<clickablesArray.length; i++) {
