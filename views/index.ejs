@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%= picObj.name %></title>
+  <title><%= name %></title>
   <link rel="stylesheet" href="/css/pic4ward.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
@@ -20,12 +20,11 @@
       dataStore = <%-newClickables%>;
       set_body_height();
       $(window).bind('resize', resizeCallback);
+      // Set image 'src'
       var relURL = $(location).attr('host');
-      var imageSrc = 'http://' + relURL + '/<%= picObj.url %>';
-      var jsSrc    = 'http://' + relURL + 'js/util.js';
-      console.log(relURL);
+      //var imageSrc = 'http://' + relURL + '/<%= url %>';
+      var imageSrc = '<%= url %>';
       $('img').attr('src', imageSrc);
-      $('#util').attr('src', jsSrc);
     });
     // After image has been fully loaded
     $(window).load(function() {     
