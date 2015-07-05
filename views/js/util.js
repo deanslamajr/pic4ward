@@ -1,6 +1,39 @@
 function set_body_height() {
   var wh = $(window).height();
-  $('div').attr('style', 'height:' + wh + 'px;');
+  var ww = $(window).width();
+  $('#pic-container').attr('style', 'height:' + wh + 'px;');
+  $('#pic-container').attr('style', 'width:' + ww + 'px;');
+  // get $img height and width
+  var imgWidth = $('img').get(0).naturalWidth; 
+  var imgHeight = $('img').get(0).naturalHeight;
+  // image is portrait ratio
+  if(imgHeight>imgWidth) {
+    var multiplier = wh/imgHeight;
+  } 
+  // image is landscape ratio
+  else {
+    var multiplier = ww/imgWidth;
+  }
+  var newHeight = imgHeight*multiplier;
+  var newWidth  = imgWidth*multiplier;
+  if(newHeight <= wh && newWidth <= ww) {
+    $('img').height(newHeight);
+    $('img').width(newWidth);
+  }
+  if(newWidth > ww) {
+    multiplier = ww/imgWidth;
+    newWidth = ww;
+    newHeight =imgHeight*multiplier;
+    $('img').height(newHeight);
+    $('img').width(newWidth);
+  }
+  if(newHeight > wh) {
+    multiplier = wh/imgHeight;
+    newHeight = wh;
+    newWidth  = imgWidth*multiplier;
+    $('img').height(newHeight);
+    $('img').width(newWidth);
+  }
 }
 
 function setup_canvas(clickablesArray) {
