@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <title><%= name %></title>
   <link rel="stylesheet" href="/css/pic4ward.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.js"></script>
   <script id="util" src="/js/util.js"></script>
   <script type="text/javascript" language="JavaScript">
     var dataStore;
@@ -25,18 +26,21 @@
       var imageSrc = '<%= url %>';
       $('img').attr('src', imageSrc);
     });
-    // After image has been fully loaded
-    $(window).load(function() {     
+    $(window).load(function() {
+      // After image has been fully loaded
+      imagesLoaded( $('img'), function() {     
         set_body_height();
         setup_canvas(clickablesArray);
-        clickablesArray = draw_clickables(dataStore);     
+        clickablesArray = draw_clickables(dataStore);
+        $('img').show();     
+      });
     });
   </script>
   
 </head>
 <body>
   <div id="pic-container">
-    <img src="" alt="The first" class="center fit" ></img>
+    <img src="" alt="The first" class="center fit" style="display: none;"></img>
   </div>
 </body>
 </html>
