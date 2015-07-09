@@ -11,6 +11,7 @@
   display: flex;         /* NEW, Spec - Opera 12.1, Firefox 20+ */
   -webkit-justify-content: center;
   justify-content: center;  /* center horizontal */
+  -webkit-align-items: center;
   align-items: center;      /* center vertical */
   margin: 0, auto;
 }
