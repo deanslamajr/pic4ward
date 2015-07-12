@@ -70,7 +70,7 @@ function draw_clickables(clickablesDataArray) {
               "fill-opacity": 0});
     temp.node.onclick = function(url) {
         console.log(url);
-        window.location.href = url;
+        window.location.href = '/' + url;
       }.bind(clickablesDataArray[i], clickablesDataArray[i].url);
     temp.glow({color: clickablesDataArray[i].color, width: 1.5, opacity: .25})  
     clickablesArray.push(temp);
