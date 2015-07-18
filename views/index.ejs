@@ -24,7 +24,7 @@
       $(window).bind('resize', resizeCallback);
       // Set image 'src'
       var relURL = $(location).attr('host');
-      var imageSrc = '<%= url %>?'+Math.random();
+      var imageSrc = '<%= url %>';//?'+Math.random();
       $('img').attr('src', imageSrc);
     });
     /*
@@ -39,7 +39,6 @@
     };*/
     $(window).load(function() {
       // After image has been fully loaded
-      alert('hello');
       imagesLoaded( $('img'), function() {     
         set_body_height();
         setup_canvas(clickablesArray);
