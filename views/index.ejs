@@ -2,11 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="cache-control" content="max-age=0">
-  <meta http-equiv="cache-control" content="no-cache">
-  <meta http-equiv="expires" content="-1">
-  <meta http-equiv="expires" content="Tue, 01 Jan 1980 11:00:00 GMT">
-  <meta http-equiv="pragma" content="no-cache">
   <title><%= name %></title>
   <link rel="stylesheet" href="/css/pic4ward.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -29,7 +24,7 @@
       $(window).bind('resize', resizeCallback);
       // Set image 'src'
       var relURL = $(location).attr('host');
-      var imageSrc = '<%= url %>';
+      var imageSrc = '<%= url %>?'+Math.random();
       $('img').attr('src', imageSrc);
     });
     /*
