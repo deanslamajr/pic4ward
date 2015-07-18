@@ -26,6 +26,16 @@
       var imageSrc = '<%= url %>';
       $('img').attr('src', imageSrc);
     });
+    var pageShowDuties = function() {
+      // After image has been fully loaded
+      imagesLoaded( $('img'), function() {     
+        set_body_height();
+        setup_canvas(clickablesArray);
+        clickablesArray = draw_clickables(dataStore);
+        $('img').show();     
+      });
+    };
+    /*
     $(window).load(function() {
       // After image has been fully loaded
       imagesLoaded( $('img'), function() {     
@@ -34,11 +44,11 @@
         clickablesArray = draw_clickables(dataStore);
         $('img').show();     
       });
-    });
+    });*/
   </script>
   
 </head>
-<body>
+<body onpageshow="pageShowDuties()">
   <div id="pic-container">
     <img src="" alt="The first" class="center fit" style="display: none;"></img>
   </div>

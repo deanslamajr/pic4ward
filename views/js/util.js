@@ -69,7 +69,6 @@ function draw_clickables(clickablesDataArray) {
               fill: "clear",
               "fill-opacity": 0});
     temp.node.onclick = function(url) {
-        console.log(url);
         window.location.href = '/' + url;
       }.bind(clickablesDataArray[i], clickablesDataArray[i].url);
     temp.glow({color: clickablesDataArray[i].color, width: 1.5, opacity: .25})  
@@ -84,6 +83,12 @@ function draw_clickables(clickablesDataArray) {
     }.bind(this,i)
     clickablesArray[i].shimmer();
   }
+  var menuIcon = this.paper.image('http://pics.pic4ward.com/menu3.png',250,450,35,35)
+  menuIcon.attr({
+    'opacity': .75,
+    'fill': 'white'
+  });
+  clickablesArray.push(menuIcon);
   return clickablesArray;
 } 
 

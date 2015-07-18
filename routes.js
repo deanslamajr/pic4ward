@@ -17,7 +17,7 @@ router.get('/', function (req, res){
       var bColor      = doc.bColor;
       res.render('index', {'name': name, 'url': url, 'bColor': bColor, 'newClickables': JSON.stringify(clickables)} );
     } else {
-      console.log(err);
+      console.log("hello" + err);
       res.send('Whoops!!');
     }
   });
@@ -33,7 +33,7 @@ router.get('/:id', function (req, res){
       var bColor      = doc.bColor;
       res.render('index', {'name': name, 'url': url, 'bColor': bColor, 'newClickables': JSON.stringify(clickables)} );
     } else {
-      console.log(err);
+      console.log("hello" + err);
       res.send('Whoops!!');
     }
   });
