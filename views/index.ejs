@@ -28,16 +28,6 @@
       var imageSrc = '<%= url %>';//?'+Math.random();
       $('img').attr('src', imageSrc);
     });
-    /*
-    var pageShowDuties = function() {
-      // After image has been fully loaded
-      imagesLoaded( $('img'), function() {     
-        set_body_height();
-        setup_canvas(clickablesArray);
-        clickablesArray = draw_clickables(dataStore);
-        $('img').show();     
-      });
-    };*/
     $(window).load(function() {
       // After image has been fully loaded
       imagesLoaded( $('img'), function() {     
@@ -47,7 +37,6 @@
         $('img').show();     
       });
     });
-    //onpageshow="pageShowDuties()"
   </script>
   
 </head>
