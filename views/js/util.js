@@ -1,6 +1,9 @@
 function set_body_height() {
   var wh = $(window).height();
   var ww = $(window).width();
+  var innerHeigth = $(window).innerHeight();
+  var innerWidth  = $(window).innerWidth();
+  alert( 'window.height: ' + wh + '\nwindow.innerHeight: ' + innerHeight + '\nwindow.width: ' + ww + '\nwindow.innerWidth: ' + innerWidth);
   $('#pic-container').attr('style', 'height:' + wh + 'px;');
   $('#pic-container').attr('style', 'width:' + ww + 'px;');
   // get $img height and width
