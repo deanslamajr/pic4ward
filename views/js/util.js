@@ -1,11 +1,9 @@
 function set_body_height() {
-  //var wh = $(window).height();
-  //var ww = $(window).width();
+  var wh = $(window).height();
+  var ww = $(window).width();
   //$(window).innerHeight(wh);
   //$(window).innerWidth(ww);
-  //alert( 'window.height: ' + wh + '\nwindow.innerHeight: ' + $(window).innerHeight() + '\nwindow.width: ' + ww + '\nwindow.innerWidth: ' + $(window).innerWidth());
-  var wh = innerHeight;
-  var ww = innerWidth;
+  alert( 'window.height: ' + wh + '\nwindow.innerHeight: ' + $(window).innerHeight() + '\ninnerHeight: ' + innerHeight + '\nwindow.width: ' + ww + '\nwindow.innerWidth: ' + $(window).innerWidth() + '\ninnerWidth: ' + innerWidth);
   $('#pic-container').attr('style', 'height:' + wh + 'px;');
   $('#pic-container').attr('style', 'width:' + ww + 'px;');
   // get $img height and width
@@ -50,8 +48,7 @@ function setup_canvas(clickablesArray) {
     delete this.paper;
     $('svg').remove();
   }
-  //this.paper = new Raphael( (($(window).width()/2)-($("img").width())/2), (($(window).height()/2)-($("img").height())/2), $("img").width(), $("img").height());
-  this.paper = new Raphael( ((innerWidth/2)-($("img").width())/2), ((innerHeight/2)-($("img").height())/2), $("img").width(), $("img").height());
+  this.paper = new Raphael( (($(window).width()/2)-($("img").width())/2), (($(window).height()/2)-($("img").height())/2), $("img").width(), $("img").height());
   /*
   // To grab points from console
   this.paper.rect(0,0,$("img").width(),$("img").height())
