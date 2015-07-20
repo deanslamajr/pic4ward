@@ -11,6 +11,9 @@
   <script id="util" src="/js/util.js"></script>
   <script type="text/javascript" language="JavaScript">
     //history.navigationMode = 'compatible';
+    if( $(window).width() + 1 !== window.innerWidth ) {
+      alert('$(window).width(): ' + $(window).width() + ' window.innerWidth: ' + window.innerWidth);
+    }
     var dataStore;
     var clickablesArray;
     $('html').css('background-color', '#<%-bColor%>');
