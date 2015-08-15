@@ -83,14 +83,45 @@ function draw_clickables(clickablesDataArray) {
     }.bind(this,i)
     clickablesArray[i].shimmer();
   }
-  var menuIcon = this.paper.image('http://pics.pic4ward.com/menu3.png',250,450,35,35)
+  // Menu Icon
+  var iconDimension = getSizeOfMenuIcon();
+  var iconCoordinates = getLocationOfMenuIcon(iconDimension);
+  var menuIcon = this.paper.image('http://pics.pic4ward.com/menu3.png', iconCoordinates.x, iconCoordinates.y, iconDimension, iconDimension)
   menuIcon.attr({
-    'opacity': .75,
-    'fill': 'white'
+    'opacity': .75
   });
+  menuIcon.node.onclick = function() {
+    if(!isGray) {
+      $('#pic-container').attr('class', 'gray');
+      $('html').css('background-color', '#000000');
+      isGray = true;
+    } else {
+      $('#pic-container').attr('class', '');
+      $('html').css('background-color', bColor);
+      isGray = false;
+    }
+  };
   clickablesArray.push(menuIcon);
   return clickablesArray;
 } 
+
+function getLocationOfMenuIcon(dimensions) {
+  var coordinates = {};
+  var difference = 2 * dimensions;
+  coordinates.x = $("img").width() - dimensions;
+  coordinates.y = $("img").height() - dimensions;
+  return coordinates;
+}
+
+function getSizeOfMenuIcon() {
+  var unit;
+  if($("img").height() >= $("img").height()) {
+    unit = .12 * $("img").height();
+  } else {
+    unit = .12 * $("img").width();
+  }
+  return unit;
+}
 
 function getPath(thisClickable) {
   var stuff = {x: 0, y: 0, path: 'M '};
