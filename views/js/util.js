@@ -36,16 +36,17 @@ function set_body_height() {
   }
 }
 
-function clear_clickables(clickableToBeginDeletingAtPosition) {
-  for(var i = clickableToBeginDeletingAtPosition; i<clickablesArray.length; i++) {
+function clear_clickables() {
+  for(var i = 0; i<clickablesArray.length; i++) {
       clickablesArray[i].remove();
   }
+  clickablesArray = [];
   $('svg').remove();
 }
 
 function setup_canvas() {
   if(this.paper) {
-    clear_clickables(0);
+    clear_clickables();
     delete this.paper;
   }
   this.paper = new Raphael( (($(window).width()/2)-($("img").width())/2), (($(window).height()/2)-($("img").height())/2), $("img").width(), $("img").height());
@@ -73,7 +74,6 @@ function draw_menuButton() {
     if(!isGray) {
       $('#pic-container').attr('class', 'gray');
       $('html').css('background-color', '#000000');
-      clear_clickables(0);
       setup_canvas();
       draw_menuButton();
       isGray = true;
