@@ -14,11 +14,9 @@ app.use(express.static(path.join(__dirname, 'bower_components')));
 app.use(bodyParser());
 
 // define routes
-
 app.use(require('./routes'));
 
 // start the server
-
 app.listen(app.get('port'), function (){
 	console.log('ready on port ' + app.get('port'));
 });
