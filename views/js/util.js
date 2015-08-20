@@ -36,14 +36,17 @@ function set_body_height() {
   }
 }
 
-function setup_canvas(clickablesArray) {
-  if(this.paper) {
-    for(var i = 0; i<clickablesArray.length; i++) {
+function clear_clickables(clickableToBeginDeletingAtPosition) {
+  for(var i = clickableToBeginDeletingAtPosition; i<clickablesArray.length; i++) {
       clickablesArray[i].remove();
-    }
+  }
+  $('svg').remove();
+}
 
+function setup_canvas() {
+  if(this.paper) {
+    clear_clickables(0);
     delete this.paper;
-    $('svg').remove();
   }
   this.paper = new Raphael( (($(window).width()/2)-($("img").width())/2), (($(window).height()/2)-($("img").height())/2), $("img").width(), $("img").height());
   /*
@@ -59,34 +62,10 @@ function setup_canvas(clickablesArray) {
     */
 }
 
-function draw_clickables(clickablesDataArray) {
-  var clickablesArray = [];
-  for(var i = 0; i<clickablesDataArray.length; i++) {  
-    var path = getPath(clickablesDataArray[i]);
-    var temp = this.paper.path(path)
-      .attr({ "stroke-opacity": 0, 
-              "stroke-width": 1,
-              fill: "clear",
-              "fill-opacity": 0});
-    temp.node.onclick = function(url) {
-        window.location.href = '/' + url;
-      }.bind(clickablesDataArray[i], clickablesDataArray[i].url);
-    temp.glow({color: clickablesDataArray[i].color, width: 1.5, opacity: .25})  
-    clickablesArray.push(temp);
-  }
-  for(var i = 0; i<clickablesArray.length; i++) {
-    clickablesArray[i].shimmer = function (temp) {
-        clickablesArray[temp].animate({stroke: clickablesDataArray[temp].color, "stroke-opacity": 5}, 250, clickablesArray[temp].shammer);
-    }.bind(this,i);
-    clickablesArray[i].shammer = function (temp) {
-        clickablesArray[temp].animate({stroke: '#FFFFFF', "stroke-opacity": 0}, 1000, clickablesArray[temp].shimmer);
-    }.bind(this,i)
-    clickablesArray[i].shimmer();
-  }
-  // Menu Icon
+function draw_menuButton() {
   var iconDimension = getSizeOfMenuIcon();
   var iconCoordinates = getLocationOfMenuIcon(iconDimension);
-  var menuIcon = this.paper.image('http://pics.pic4ward.com/menu3.png', iconCoordinates.x, iconCoordinates.y, iconDimension, iconDimension)
+  var menuIcon = this.paper.image('http://pics.pic4ward.com/menu3.png', iconCoordinates.x, iconCoordinates.y, iconDimension, iconDimension);
   menuIcon.attr({
     'opacity': .75
   });
@@ -94,15 +73,44 @@ function draw_clickables(clickablesDataArray) {
     if(!isGray) {
       $('#pic-container').attr('class', 'gray');
       $('html').css('background-color', '#000000');
+      clear_clickables(0);
+      setup_canvas();
+      draw_menuButton();
       isGray = true;
     } else {
       $('#pic-container').attr('class', '');
       $('html').css('background-color', bColor);
+      draw_clickables();
       isGray = false;
     }
   };
   clickablesArray.push(menuIcon);
-  return clickablesArray;
+}
+
+function draw_clickables() {
+  for(var i = 0; i<dataStore.length; i++) {  
+    var shape = getPath(dataStore[i]);
+    var clickable = this.paper.path(shape)
+      .attr({ "stroke-opacity": 0, 
+              "stroke-width": 1,
+              fill: "clear",
+              "fill-opacity": 0});
+    clickable.node.onclick = function(url) {
+        window.location.href = '/' + url;
+      }.bind(dataStore[i], dataStore[i].url);
+    clickable.glow({color: dataStore[i].color, width: 1.5, opacity: .25})  
+    clickablesArray.push(clickable);
+  }
+  // Start at item 1 because 0 is menu button
+  for(var i = 1; i<clickablesArray.length; i++) {
+    clickablesArray[i].shimmer = function (clickablesArrayPos) {
+        clickablesArray[clickablesArrayPos].animate({stroke: dataStore[clickablesArrayPos - 1].color, "stroke-opacity": 5}, 250, clickablesArray[clickablesArrayPos].shammer);
+    }.bind(this,i);
+    clickablesArray[i].shammer = function (clickablesArrayPos) {
+        clickablesArray[clickablesArrayPos].animate({stroke: '#FFFFFF', "stroke-opacity": 0}, 1000, clickablesArray[clickablesArrayPos].shimmer);
+    }.bind(this,i)
+    clickablesArray[i].shimmer();
+  }
 } 
 
 function getLocationOfMenuIcon(dimensions) {

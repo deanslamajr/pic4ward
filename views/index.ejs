@@ -10,20 +10,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.js"></script>
   <script id="util" src="/js/util.js"></script>
   <script type="text/javascript" language="JavaScript">
-    //history.navigationMode = 'compatible';
-    var dataStore;
-    var clickablesArray;
+    var dataStore = <%-newClickables%>;
+    var clickablesArray = [];
     var isGray = false;
     var bColor = '#<%-bColor%>';
     $('html').css('background-color', bColor);
     var resizeCallback = function() { 
       set_body_height();
-      setup_canvas(clickablesArray); 
-      clickablesArray = draw_clickables(dataStore);
+      setup_canvas(); 
+      draw_menuButton();
+      draw_clickables();
     }
     // After DOM is constructed
     $(document).ready(function() {
-      dataStore = <%-newClickables%>;
       $(window).bind('resize', resizeCallback);
       // Set image 'src'
       var relURL = $(location).attr('host');
@@ -33,9 +32,7 @@
     $(window).load(function() {
       // After image has been fully loaded
       imagesLoaded( $('img'), function() {     
-        set_body_height();
-        setup_canvas(clickablesArray);
-        clickablesArray = draw_clickables(dataStore);
+        resizeCallback();
         $('img').show();  
       });
     });
