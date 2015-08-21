@@ -66,7 +66,7 @@ function setup_canvas() {
 function draw_menuButton() {
   var iconDimension = getSizeOfMenuIcon();
   var iconCoordinates = getLocationOfMenuIcon(iconDimension);
-  var menuIcon = this.paper.image('http://pics.pic4ward.com/menu3.png', iconCoordinates.x, iconCoordinates.y, iconDimension, iconDimension);
+  var menuIcon = this.paper.image('http://icons.pic4ward.com/menu.png', iconCoordinates.x, iconCoordinates.y, iconDimension, iconDimension);
   menuIcon.attr({
     'opacity': .75
   });
