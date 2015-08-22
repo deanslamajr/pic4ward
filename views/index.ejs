@@ -28,6 +28,9 @@
       var relURL = $(location).attr('host');
       var imageSrc = '<%= url %>';
       $('img').attr('src', imageSrc);
+
+      var windowWidth = $(window).width();
+      alert('The width of this window is: ' + windowWidth);
     });
     $(window).load(function() {
       // After image has been fully loaded
