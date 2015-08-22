@@ -50,7 +50,7 @@ function setup_canvas() {
     delete this.paper;
   }
   this.paper = new Raphael( (($(window).width()/2)-($("img").width())/2), (($(window).height()/2)-($("img").height())/2), $("img").width(), $("img").height());
-  /*
+  
   // To grab points from console
   this.paper.rect(0,0,$("img").width(),$("img").height())
     .attr({"fill": "clear", "fill-opacity": 0})
@@ -60,7 +60,7 @@ function setup_canvas() {
       console.log((e.pageX - offset.left)/$("img").width());
       console.log((e.pageY - offset.top)/$("img").height());
     };
-    */
+    
 }
 
 function draw_menuButton() {
