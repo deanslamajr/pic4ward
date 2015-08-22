@@ -24,13 +24,7 @@
     // After DOM is constructed
     $(document).ready(function() {
       $(window).bind('resize', resizeCallback);
-      // Set image 'src'
-      var relURL = $(location).attr('host');
-      var imageSrc = '<%= url %>';
-      $('img').attr('src', imageSrc);
-
-      var windowWidth = $(window).width();
-      alert('The width of this window is: ' + windowWidth);
+      set_Pic('<%= url %>');
     });
     $(window).load(function() {
       // After image has been fully loaded

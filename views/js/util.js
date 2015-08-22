@@ -44,6 +44,19 @@ function clear_clickables() {
   $('svg').remove();
 }
 
+function set_Pic(url) { 
+  var resOfPic;
+  var windowWidth = $(window).width();
+  if(windowWidth > 700) {
+    resOfPic = "http://pics.pic4ward.com/"
+  } else {
+    resOfPic = "http://mobile.pic4ward.com/"
+  }
+  // Set image 'src' dynamically
+  var imageSrc = resOfPic + url;
+  $('img').attr('src', imageSrc);
+}
+
 function setup_canvas() {
   if(this.paper) {
     clear_clickables();
