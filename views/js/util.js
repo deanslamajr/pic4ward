@@ -52,7 +52,6 @@ function set_Pic(url) {
   } else {
     resOfPic = "http://mobile.pic4ward.com/"
   }
-  alert('window size: ' + windowWidth + ' start of url: ' + resOfPic);
   // Set image 'src' dynamically
   var imageSrc = resOfPic + url;
   $('img').attr('src', imageSrc);
