@@ -5,7 +5,7 @@ var router = express.Router();
 
 //local db:
 //var db = mongojs('localPic4Ward', ['localPic4Ward']);
-var db = mongojs( 'heroku_70wln8p7:ckrcrt2u2s98sq78job27md3pk@ds043952.mongolab.com:43952/heroku_70wln8p7', ['PicObjects']); 
+var db = mongojs( 'heroku_70wln8p7:ckrcrt2u2s98sq78job27md3pk@ds043952.mongolab.com:43952/heroku_70wln8p7?authMechanism=SCRAM-SHA-1', ['PicObjects'], {authMechanism: 'ScramSHA1'}); 
 
 router.get('/', function (req, res){
   var picId = '557c7ccfe4b00a69307df6d9';
