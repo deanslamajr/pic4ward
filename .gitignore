@@ -4,3 +4,6 @@ npm-debug.log
 
 # app configurations
 config/environment.json
+
+# EB
+deploy
