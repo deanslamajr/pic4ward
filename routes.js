@@ -7,7 +7,12 @@ var router = express.Router();
 
 // setup mongoDB with password sourced from environment variable
 var mongoLoginString = envConfig.get('MONGO_USERNAME') + ':' + envConfig.get('MONGO_PASS') + '@' + envConfig.get('MONGO_SUBDOMAIN') + '.mongolab.com:' + envConfig.get('MONGO_PORT') + '/' + envConfig.get('MONGO_USERNAME') + '?authMechanism=SCRAM-SHA-1';
-var db = mongojs(mongoLoginString, ['PicObjects'], {authMechanism: 'ScramSHA1'});
+
+var collection = envConfig.get('MONGO_COLLECTION');
+var mongoCollection  = [];
+mongoCollection.push(collection);
+
+var db = mongojs(mongoLoginString, mongoCollection, {authMechanism: 'SCRAM-SHA-1'});
 
 router.get('/', function (req, res){
   var picId = '557c7ccfe4b00a69307df6d9';

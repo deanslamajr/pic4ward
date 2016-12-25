@@ -7,3 +7,4 @@ config/environment.json
 
 # EB
 deploy
+build_packages

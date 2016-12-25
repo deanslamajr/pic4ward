@@ -48,9 +48,9 @@ function set_Pic(url) {
   var resOfPic;
   var windowWidth = $(window).width();
   if(windowWidth > 700) {
-    resOfPic = "http://pics.pic4ward.com/"
+    resOfPic = "http://pics.cranyons.com/"
   } else {
-    resOfPic = "http://mobile.pic4ward.com/"
+    resOfPic = "http://mobile.cranyons.com/"
   }
   // Set image 'src' dynamically
   var imageSrc = resOfPic + url;
